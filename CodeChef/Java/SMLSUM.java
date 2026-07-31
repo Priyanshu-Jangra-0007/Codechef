@@ -1,28 +1,31 @@
-                prefixSum[i] = prefixSum[i - 1] + pairs[i - 
-                    1].b;
-            }
 
-            String[] xStr = br.readLine().split(" ");
-            for (int i = 0; i < q; i++) {
-                int x = Integer.parseInt(xStr[i]);
-                int index = upperBound(pairs, x);
-                out.print(prefixSum[index] + " ");
-            }
-            out.println();
+import java.io.*;
+import java.util.*;
+
+class Solution {
+    static class Pair implements Comparable<Pair> {
+        int a, b;
+        Pair(int a, int b) {
+            this.a = a;
+            this.b = b;
         }
-        out.close();
+        public int compareTo(Pair other) {
+            return Integer.compare(this.a, other.a);
+        }
     }
 
-    static int upperBound(Pair[] arr, int target) {
-        int low = 0, high = arr.length;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (arr[mid].a <= target) {
-                low = mid + 1;
-            } else {
-                high = mid;
-            }
-        }
-        return low;
-    }
-}
+    public static void main(String[] args) throws 
+        IOException {
+        BufferedReader br = new BufferedReader(new 
+            InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(System.out);
+        int t = Integer.parseInt(br.readLine());
+        while (t-- > 0) {
+            String[] nq = br.readLine().split(" ");
+            int n = Integer.parseInt(nq[0]);
+            int q = Integer.parseInt(nq[1]);
+
+            Pair[] pairs = new Pair[n];
+            String[] aStr = br.readLine().split(" ");
+            String[] bStr = br.readLine().split(" ");
+            for (int i = 0; i < n; i++) {
