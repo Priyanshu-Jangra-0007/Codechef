@@ -1,16 +1,3 @@
-public static List<Long> findSuperstarDishes(List<Long> a, 
-    int n) {
-    long el1 = Long.MIN_VALUE, el2 = Long.MIN_VALUE;
-    int cnt1 = 0, cnt2 = 0;
-
-    // Phase 1: Voting
-    for (int i = 0; i < n; i++) {
-        long val = a.get(i);
-
-        if (val == el1) cnt1++;
-        else if (val == el2) cnt2++;
-        else if (cnt1 == 0) {
-            el1 = val;
             cnt1 = 1;
         }
         else if (cnt2 == 0) {
@@ -29,3 +16,14 @@ public static List<Long> findSuperstarDishes(List<Long> a,
 
     for (int i = 0; i < n; i++) {
         long val = a.get(i);
+        if (val == el1) cnt1++;
+        else if (val == el2) cnt2++;
+    }
+
+    List<Long> ans = new ArrayList<>();
+    if (cnt1 > n / 3) ans.add(el1);
+    if (cnt2 > n / 3) ans.add(el2);
+
+    Collections.sort(ans);
+    return ans;
+}
